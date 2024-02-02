@@ -1,4 +1,4 @@
-package com.learn.EntranceExam;
+package com.learn.EntranceExam.model;
 
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;

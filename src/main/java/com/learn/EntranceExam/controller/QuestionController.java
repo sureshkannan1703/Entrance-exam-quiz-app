@@ -1,6 +1,6 @@
 package com.learn.EntranceExam.controller;
 
-import com.learn.EntranceExam.Question;
+import com.learn.EntranceExam.model.Question;
 import com.learn.EntranceExam.service.QuestionService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
