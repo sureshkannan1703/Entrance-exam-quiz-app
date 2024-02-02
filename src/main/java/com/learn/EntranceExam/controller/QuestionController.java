@@ -16,21 +16,22 @@ public class QuestionController {
     QuestionService questionService;
 
     @GetMapping("allquestions")
-    public List<Question> getAllQuestion(){
-
+    public ResponseEntity<List<Question>> getAllQuestion(){
         return questionService.getAllQuestions();
     }
 
     @GetMapping("category/{category_name}")
-    public List<Question> getQuestionsByCatagory(@PathVariable("category_name") String category){
-
+    public ResponseEntity<List<Question>> getQuestionsByCatagory(@PathVariable("category_name") String category){
             return questionService.getAllQuestions(category);
     }
 
     @PostMapping("addquestion")
-    public String addQuestion(@RequestBody Question question){
+    public ResponseEntity<String>  addQuestion(@RequestBody Question question){
+        return questionService.addQuestion(question);
+    }
 
-        questionService.addQuestion(question);
-        return "success";
+    @DeleteMapping("deletequestion/{question_id}")
+    public ResponseEntity<String>  deleteQuestionById(@PathVariable("question_id") int id){
+        return questionService.deleteQuestionById(id);
     }
 }
