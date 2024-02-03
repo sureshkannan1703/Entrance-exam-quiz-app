@@ -3,6 +3,7 @@ package com.learn.EntranceExam.service;
 
 import com.learn.EntranceExam.dao.ExamDao;
 import com.learn.EntranceExam.dao.QuestionDao;
+import com.learn.EntranceExam.model.Answer;
 import com.learn.EntranceExam.model.Exam;
 import com.learn.EntranceExam.model.Question;
 import com.learn.EntranceExam.model.QuestionWrapper;
@@ -13,6 +14,7 @@ import org.springframework.stereotype.Service;
 import org.springframework.web.bind.annotation.GetMapping;
 
 import java.util.ArrayList;
+import java.util.HashMap;
 import java.util.List;
 import java.util.Optional;
 
@@ -47,5 +49,23 @@ public class ExamService {
                  questionsWithoutAnswer.add(qw);
              }
             return new ResponseEntity<>(questionsWithoutAnswer,HttpStatus.OK);
+    }
+
+    public ResponseEntity<Integer> getExamResultByExamId(int examId, List<Answer> answers) {
+
+        Exam exam = examdao.findById(examId).get();
+        List<Question> exam_questions = exam.getExam_questions();
+
+        HashMap<Integer,String> ansMap = new HashMap<>();
+        for(Answer ans : answers){
+            ansMap.put(ans.getQuestion_id(),ans.getResponse());
+        }
+
+        int i=0,score =0;
+        for(Question q : exam_questions) {
+            if (ansMap.get(q.getId()).equals(q.getRight_answer()))
+                score++;
+        }
+        return new ResponseEntity<>(score,HttpStatus.OK);
     }
 }

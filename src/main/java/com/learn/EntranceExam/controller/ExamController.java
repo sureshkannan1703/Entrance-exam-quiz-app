@@ -1,5 +1,6 @@
 package com.learn.EntranceExam.controller;
 
+import com.learn.EntranceExam.model.Answer;
 import com.learn.EntranceExam.model.Question;
 import com.learn.EntranceExam.model.QuestionWrapper;
 import com.learn.EntranceExam.service.ExamService;
@@ -30,5 +31,9 @@ public class ExamController {
         return examService.getExamQuestionsByExamId(examId);
     }
 
+    @PostMapping("submit/{exam_id}")
+    public ResponseEntity<Integer> submitAnserAndGetResult(@PathVariable("exam_id") int exam_id,@RequestBody List<Answer> answers) {
 
+        return examService.getExamResultByExamId(exam_id,answers);
+    }
 }
