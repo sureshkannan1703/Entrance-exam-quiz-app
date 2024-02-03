@@ -15,7 +15,6 @@ import java.util.List;
 
 @RequestMapping("exam")
 public class ExamController {
-
     @Autowired
     ExamService examService;
 
